@@ -1,4 +1,4 @@
-import { invoke } from '@tauri-apps/api/core'
+import { Channel, invoke } from '@tauri-apps/api/core'
 import dayjs from 'dayjs'
 
 import type { CommandFailure } from '@/services/notice-service'
@@ -182,16 +182,50 @@ export async function setDnsOverride(
   >('set_dns_override', { profileUid, enabled, confirmation })
 }
 
+export async function getDnsConfigContent() {
+  return invoke<string | null>('get_dns_config_content')
+}
+
+export async function saveDnsConfig(dnsConfig: Record<string, unknown>) {
+  return invoke<void>('save_dns_config', { dnsConfig })
+}
+
+export async function validateDnsConfig() {
+  return invoke<ValidationOutcome>('validate_dns_config')
+}
+
+export async function applyDnsConfig(apply: boolean) {
+  return invoke<void>('apply_dns_config', { apply })
+}
+
 export async function takeDnsOverrideNotice() {
   return invoke<boolean>('take_dns_override_notice')
 }
 
+export type ServiceFallbackNotice =
+  | { kind: 'unavailable' }
+  | { kind: 'coreRejected'; reason: string }
+  | { kind: 'notAutoStarted' }
+
 export async function takeServiceFallbackNotice() {
-  return invoke<boolean>('take_service_fallback_notice')
+  return invoke<ServiceFallbackNotice | null>('take_service_fallback_notice')
+}
+
+export interface CoreFailure {
+  kind: 'startFailed' | 'serviceCoreStopped'
+  detail: string
+}
+
+export async function getCoreStartupError() {
+  return invoke<CoreFailure | null>('get_core_startup_error')
 }
 
 export async function takeServiceRepairNotice() {
   return invoke<boolean>('take_service_repair_notice')
+}
+
+export async function takeServiceOwnerNotice() {
+  return invoke<string | null>('take_service_owner_notice')
 }
 
 export async function takeDiscardedKeysNotice() {
@@ -450,12 +484,25 @@ export const getPendingFailures = async () => {
   return invoke<PendingFailure[]>('get_pending_failures')
 }
 
+export interface SidecarFailureSnapshot {
+  revision: number
+  detail: string | null
+}
+
+export const getSidecarFailure = async () => {
+  return invoke<SidecarFailureSnapshot>('get_sidecar_failure')
+}
+
 export const getAppUptime = async () => {
   return invoke<number>('get_app_uptime')
 }
 
+export type ServiceInstallOutcome =
+  | { status: 'installed' }
+  | { status: 'sidecar'; reason: string }
+
 export const installService = async () => {
-  return invoke<void>('install_service')
+  return invoke<ServiceInstallOutcome>('install_service')
 }
 
 export const uninstallService = async () => {
@@ -463,11 +510,11 @@ export const uninstallService = async () => {
 }
 
 export const reinstallService = async () => {
-  return invoke<void>('reinstall_service')
+  return invoke<ServiceInstallOutcome>('reinstall_service')
 }
 
 export const repairService = async () => {
-  return invoke<void>('repair_service')
+  return invoke<ServiceInstallOutcome>('repair_service')
 }
 
 export const continueWithSidecar = async () => {
@@ -522,4 +569,23 @@ export const probeListener = async (request: ListenerProbe) => {
 
 export const saveProxyPorts = async (settings: ProxyPortSettings) => {
   return invoke<SaveProxyPortsOutcome>('save_proxy_ports', { settings })
+}
+
+export interface UnlockItem {
+  name: string
+  status: string
+  region?: string | null
+  check_time?: string | null
+}
+
+export async function getUnlockItems() {
+  return invoke<UnlockItem[]>('get_unlock_items')
+}
+
+export async function checkMediaUnlock(onComplete: Channel<UnlockItem>) {
+  return invoke<UnlockItem[]>('check_media_unlock', { onComplete })
+}
+
+export async function checkMediaUnlockItem(name: string) {
+  return invoke<UnlockItem>('check_media_unlock_item', { name })
 }

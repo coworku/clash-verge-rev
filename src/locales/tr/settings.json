@@ -294,6 +294,9 @@
       },
       "messages": {
         "portInUse": "{{port}} portu zaten kullanımda",
+        "runningPort": "Şu anda kullanılan port: {{port}}",
+        "duplicatePort": "Etkin dinleyiciler farklı portlar kullanmalıdır",
+        "invalidPort": "1 ile 65535 arasında bir port girin",
         "saved": "Port ayarları kaydedildi",
         "saveFailed": "Port ayarları kaydedilemedi",
         "automaticFallback": "{{oldPort}} portu kullanımda olduğu için bu oturum {{newPort}} portunu kullanıyor. Ayarınız değişmedi ve sonraki başlatmada {{oldPort}} yeniden denenecek.",
@@ -659,6 +662,7 @@
         "modeUpdateFailed": "Proxy modu değiştirilemedi",
         "restartFailed": "Çekirdek yeniden başlatılamadı",
         "startFailed": "Çekirdek başlatılamadı",
+        "serviceCoreStopped": "Hizmetin çalıştırdığı çekirdek beklenmedik şekilde durdu",
         "stopFailed": "Çekirdek durdurulamadı"
       },
       "clashService": {
@@ -666,7 +670,8 @@
         "uninstallFailed": "Hizmet kaldırılamadı",
         "reinstallFailed": "Hizmet yeniden kurulamadı",
         "repairFailed": "Hizmet onarılamadı",
-        "sidecarFailed": "Sidecar ile devam edilemedi"
+        "sidecarFailed": "Sidecar ile devam edilemedi",
+        "coreAlreadyRunning": "Çekirdek başlatılamıyor: bir çekirdek işlemi zaten çalışıyor. İlgili uygulamayı kapatın veya kalan işlemi sonlandırıp yeniden deneyin. Sorun devam ederse bilgisayarı yeniden başlatın."
       },
       "sysproxy": {
         "privilegeRequired": "Sistem vekil sunucusu ayarlanamıyor: macOS yetki yetersizliği nedeniyle değişikliği reddetti. Clash Verge hizmetini kurun; yöneticiyseniz Sistem Ayarları → Gizlilik ve Güvenlik bölümündeki gelişmiş seçeneklerden, sistem genelindeki ayarlar için yönetici parolası zorunluluğunu da kapatabilirsiniz.",
@@ -687,7 +692,12 @@
         "geoDataUpdated": "GeoData Güncellendi"
       },
       "clashService": {
+        "appDataNotOwned": "Hizmet çekirdeği başlatmayı reddetti; çünkü diskte uygulama veri klasörünün sahibi hesabınız değil (ana klasör harici bir sürücüdeyse sık görülür). Hizmeti onarmak bunu düzeltmez. Bu komutu bir terminalde çalıştırın, ardından uygulamayı yeniden başlatın:",
         "installSuccess": "Hizmet Başarıyla Kuruldu",
+        "permissionFallback": "{{reason}} Sidecar moduna geçildi; TUN yönetici yetkisi gerektirir. Kılavuza göre sorunu düzeltip hizmeti yeniden yükleyin veya hizmeti yüklemeden uygulamayı yönetici olarak çalıştırın.",
+        "permissionWritableReason": "Normal hesaplar çekirdek dosyalarını veya üst klasörü değiştirebildiği için hizmet, çekirdeği yükseltilmiş yetkilerle çalıştırmayı reddetti.",
+        "permissionRejectedReason": "Hizmet, çekirdek dosya ve klasörlerinin yükseltilmiş yetkilerle güvenle çalıştırılabileceğini doğrulayamadı.",
+        "permissionRepairGuide": "Düzeltme adımlarını görüntüle",
         "sidecarFallback": "Hizmet çekirdeği başlatamadı. Sidecar moduna geçildi; hizmet hâlâ kullanılamıyor.",
         "uninstallSuccess": "Hizmet Başarıyla Kaldırıldı"
       },

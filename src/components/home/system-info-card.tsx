@@ -4,6 +4,7 @@ import {
   AdminPanelSettingsOutlined,
   DnsOutlined,
   ExtensionOutlined,
+  PauseCircleOutlined,
 } from '@mui/icons-material'
 import { Typography, Stack, Divider, Chip, IconButton } from '@mui/material'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -22,7 +23,8 @@ export const SystemInfoCard = () => {
   const { t } = useTranslation()
   const { verge, patchVerge } = useVerge()
   const navigate = useNavigate()
-  const { isAdminMode, isSidecarMode, mutateSystemState } = useSystemState()
+  const { runningMode, isAdminMode, isSidecarMode, mutateSystemState } =
+    useSystemState()
   const { installServiceAndRestartCore } = useServiceInstaller()
 
   const [osInfo, setOsInfo] = useState('')
@@ -92,6 +94,14 @@ export const SystemInfoCard = () => {
   )
 
   const getModeIcon = () => {
+    if (runningMode === 'NotRunning') {
+      return (
+        <PauseCircleOutlined
+          sx={{ color: 'text.secondary', fontSize: 16 }}
+          titleAccess={t('home.components.systemInfo.badges.notRunning')}
+        />
+      )
+    }
     if (isAdminMode) {
       if (!isSidecarMode) {
         return (
@@ -131,6 +141,9 @@ export const SystemInfoCard = () => {
   }
 
   const getModeText = () => {
+    if (runningMode === 'NotRunning') {
+      return t('home.components.systemInfo.badges.notRunning')
+    }
     if (isAdminMode) {
       if (!isSidecarMode) {
         return t('home.components.systemInfo.badges.adminServiceMode')
