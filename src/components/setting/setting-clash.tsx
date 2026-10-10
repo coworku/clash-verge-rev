@@ -36,13 +36,15 @@ const SettingClash = ({ onError }: Props) => {
   const { t } = useTranslation()
 
   const { clash, version, mutateClash, patchClash } = useClash()
-  const { verge, mutateVerge } = useVerge()
+  const { verge, mutateVerge, patchVerge } = useVerge()
   const { current: currentProfile } = useProfiles()
   const dnsEnabled = currentProfile
     ? (verge?.profile_dns_settings?.[currentProfile.uid]?.enabled ??
       verge?.enable_dns_settings ??
       false)
     : false
+  const allowProfileOverrides = verge?.allow_profile_overrides ?? false
+  const enableNodeFilter = verge?.enable_node_filter ?? true
   const displayedMixedPort = useDisplayedMixedPort()
   const [, setClashLog] = useClashLog()
 
@@ -189,6 +191,53 @@ const SettingClash = ({ onError }: Props) => {
           disabled={!currentProfile || dnsUpdating || dnsConfirmation !== null}
           onChange={(_, checked) => handleDnsToggle(checked)}
         />
+      </SettingItem>
+      <SettingItem
+        label={t('settings.sections.clash.form.fields.nodeFilter')}
+        extra={
+          <TooltipIcon
+            title={t('settings.sections.clash.form.tooltips.nodeFilter')}
+            sx={{ opacity: '0.7' }}
+          />
+        }
+      >
+        <GuardState
+          value={enableNodeFilter}
+          valueProps="checked"
+          onCatch={onError}
+          onFormat={onSwitchFormat}
+          onChange={(e) =>
+            mutateVerge({ ...verge, enable_node_filter: e }, false)
+          }
+          onGuard={(e) => patchVerge({ enable_node_filter: e })}
+        >
+          <Switch edge="end" />
+        </GuardState>
+      </SettingItem>
+
+      <SettingItem
+        label={t('settings.sections.clash.form.fields.allowProfileOverrides')}
+        extra={
+          <TooltipIcon
+            title={t(
+              'settings.sections.clash.form.tooltips.allowProfileOverrides',
+            )}
+            sx={{ opacity: '0.7' }}
+          />
+        }
+      >
+        <GuardState
+          value={allowProfileOverrides}
+          valueProps="checked"
+          onCatch={onError}
+          onFormat={onSwitchFormat}
+          onChange={(e) =>
+            mutateVerge({ ...verge, allow_profile_overrides: e }, false)
+          }
+          onGuard={(e) => patchVerge({ allow_profile_overrides: e })}
+        >
+          <Switch edge="end" />
+        </GuardState>
       </SettingItem>
 
       <SettingItem label={t('settings.sections.clash.form.fields.ipv6')}>

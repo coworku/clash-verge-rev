@@ -111,6 +111,8 @@
           "clashCore": "Ядро Clash",
           "openUwpTool": "Открыть инструмент UWP",
           "updateGeoData": "Обновить GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Управление туннелями",
             "localAddr": "Локальный адрес прослушивания",
@@ -140,7 +142,9 @@
           "networkInterface": "Сетевой интерфейс",
           "unifiedDelay": "Когда точная задержка включена, выполняются два теста задержки, чтобы устранить различия между разными типами узлов, вызванные подтверждением соединения и другими факторами",
           "logLevel": "Это влияет только на файлы журнала ядра в служебном файле в каталоге логов.",
-          "openUwpTool": "С Windows 8 приложения UWP (такие как Microsoft Store) ограничены в прямом доступе к сетевым службам локального хоста, и этот инструмент позволяет обойти это ограничение"
+          "openUwpTool": "С Windows 8 приложения UWP (такие как Microsoft Store) ограничены в прямом доступе к сетевым службам локального хоста, и этот инструмент позволяет обойти это ограничение",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

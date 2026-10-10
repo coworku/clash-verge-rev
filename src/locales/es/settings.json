@@ -111,6 +111,8 @@
           "clashCore": "Núcleo de Clash",
           "openUwpTool": "Abrir herramienta UWP",
           "updateGeoData": "Actualizar GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Gestión de Túneles",
             "localAddr": "Dirección de Escucha Local",
@@ -140,7 +142,9 @@
           "networkInterface": "Interfaz de red",
           "unifiedDelay": "Al habilitar la latencia unificada, se realizarán dos pruebas de latencia para eliminar las diferencias de latencia entre diferentes tipos de nodos causadas por el handshake de conexión, etc.",
           "logLevel": "Solo se aplica al archivo de registro del núcleo en la carpeta Service del directorio de registros.",
-          "openUwpTool": "A partir de Windows 8, las aplicaciones UWP (como la Tienda de Microsoft) tienen restricciones para acceder directamente a los servicios de red del host local. Use esta herramienta para evitar esta restricción."
+          "openUwpTool": "A partir de Windows 8, las aplicaciones UWP (como la Tienda de Microsoft) tienen restricciones para acceder directamente a los servicios de red del host local. Use esta herramienta para evitar esta restricción.",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

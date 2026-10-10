@@ -111,6 +111,8 @@
           "clashCore": "Clash Core",
           "openUwpTool": "Open UWP tool",
           "updateGeoData": "Update GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Tunnel Management",
             "localAddr": "Local Listen Address",
@@ -140,7 +142,9 @@
           "networkInterface": "Network Interface",
           "unifiedDelay": "When unified delay is turned on, two delay tests will be performed to eliminate the delay differences between different types of nodes caused by connection handshakes, etc",
           "logLevel": "This parameter is valid only for kernel log files in the log directory Service folder",
-          "openUwpTool": "Since Windows 8, UWP apps (such as Microsoft Store) are restricted from directly accessing local host network services, and this tool can be used to bypass this restriction"
+          "openUwpTool": "Since Windows 8, UWP apps (such as Microsoft Store) are restricted from directly accessing local host network services, and this tool can be used to bypass this restriction",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

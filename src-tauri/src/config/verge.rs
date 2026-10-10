@@ -128,6 +128,15 @@ pub struct IVerge {
 
     pub enable_builtin_enhanced: Option<bool>,
 
+    /// Allow per-profile merge/script/rules/proxies/groups overrides.
+    pub allow_profile_overrides: Option<bool>,
+
+    /// Apply the configured node-name filter to proxy groups and providers.
+    pub enable_node_filter: Option<bool>,
+
+    /// Regular expression used for automatic node filtering.
+    pub node_filter: Option<String>,
+
     pub proxy_layout_column: Option<u8>,
 
     pub test_list: Option<Vec<IVergeTestItem>>,
@@ -346,6 +355,7 @@ impl IVerge {
             common_tray_icon: Some(false),
             sysproxy_tray_icon: Some(false),
             tun_tray_icon: Some(false),
+            enable_tun_mode: Some(false),
             enable_auto_launch: Some(false),
             enable_silent_start: Some(false),
             enable_hover_jump_navigator: Some(true),
@@ -372,8 +382,11 @@ impl IVerge {
             use_default_bypass: Some(true),
             proxy_guard_duration: Some(30),
             auto_close_connection: Some(true),
-            auto_check_update: Some(true),
+            auto_check_update: Some(false),
             enable_builtin_enhanced: Some(true),
+            allow_profile_overrides: Some(false),
+            enable_node_filter: Some(true),
+            node_filter: Some("日本|新加坡|美国|Japan|Singapore|United States|USA".into()),
             auto_log_clean: Some(2), // 1: 1天, 2: 7天, 3: 30天, 4: 90天
             enable_auto_backup_schedule: Some(false),
             auto_backup_interval_hours: Some(24),
@@ -474,6 +487,9 @@ impl IVerge {
         patch!(enable_auto_delay_detection);
         patch!(auto_delay_detection_interval_minutes);
         patch!(enable_builtin_enhanced);
+        patch!(allow_profile_overrides);
+        patch!(enable_node_filter);
+        patch!(node_filter);
         patch!(proxy_layout_column);
         patch!(test_list);
         patch!(auto_log_clean);

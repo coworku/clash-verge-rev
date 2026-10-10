@@ -111,6 +111,8 @@
           "clashCore": "Clash 內核",
           "openUwpTool": "UWP 工具",
           "updateGeoData": "更新 GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "流量隧道管理",
             "localAddr": "本地監聽位址",
@@ -140,7 +142,9 @@
           "networkInterface": "網路介面",
           "unifiedDelay": "開啟統一延遲時，會進行兩次延遲測試，以消除連線握手等帶來的不同類型節點的延遲差異",
           "logLevel": "僅對日誌目錄 Service 資料夾下的內核日誌檔案生效",
-          "openUwpTool": "Windows 8 開始限制 UWP 應用程式（如Microsoft Store）直接存取本機主機的網路服務，使用此工具可繞過該限制"
+          "openUwpTool": "Windows 8 開始限制 UWP 應用程式（如Microsoft Store）直接存取本機主機的網路服務，使用此工具可繞過該限制",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

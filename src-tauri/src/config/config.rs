@@ -1,6 +1,6 @@
 use super::{IClashTemp, IProfiles, IVerge, MixedPort};
 use crate::{
-    config::{PrfItem, profiles_append_item_to_safe, runtime::IRuntime},
+    config::{PrfItem, profiles_append_item_to_safe, profiles_save_file_safe, runtime::IRuntime},
     constants::{files, timing},
     core::{
         CoreManager,
@@ -71,6 +71,7 @@ impl Config {
 
     pub async fn init_config_before_window() -> Result<()> {
         Self::ensure_default_profile_items().await?;
+        Self::import_subscription_sidecar().await?;
 
         let verge = Self::verge().await.latest_arc();
         clash_verge_i18n::sync_locale(verge.language.as_deref());
@@ -78,6 +79,108 @@ impl Config {
         Ok(())
     }
 
+    async fn import_subscription_sidecar() -> Result<()> {
+        let Some(executable_dir) = std::env::current_exe()
+            .ok()
+            .and_then(|path| path.parent().map(PathBuf::from))
+        else {
+            return Ok(());
+        };
+        let sidecar_path = executable_dir.join("subscriptions.txt");
+        let Ok(contents) = tokio::fs::read_to_string(&sidecar_path).await else {
+            return Ok(());
+        };
+        let urls = contents
+            .lines()
+            .map(str::trim)
+            .filter(|line| !line.is_empty() && !line.starts_with('#'))
+            .filter(|line| line.starts_with("https://") || line.starts_with("http://"))
+            .collect::<Vec<_>>();
+        if urls.is_empty() {
+            return Ok(());
+        }
+
+        let app_home = dirs::app_home_dir()?;
+        let first_local_setup = app_home.join(".local-setup-complete");
+        let provider_setup = app_home.join(".local-provider-setup-complete");
+        let should_apply_local_defaults = !first_local_setup.exists();
+        let profiles = Self::profiles().await;
+
+        if !provider_setup.exists() {
+            let profile_name: String = "Local subscriptions".into();
+            let profile_exists = profiles
+                .latest_arc()
+                .items
+                .as_ref()
+                .is_some_and(|items| items.iter().any(|item| item.name.as_ref() == Some(&profile_name)));
+            if !profile_exists {
+                let mut item = PrfItem::from(
+                    &PrfItem {
+                        itype: Some("local".into()),
+                        name: Some(profile_name),
+                        desc: Some("Imported from subscriptions.txt".into()),
+                        ..PrfItem::default()
+                    },
+                    Some(Self::subscription_provider_profile(&urls)?),
+                )
+                .await?;
+                let uid = item.uid.clone();
+                profiles_append_item_to_safe(&profiles, &mut item).await?;
+                profiles.edit_draft(|draft| draft.current = uid);
+                profiles.apply();
+                profiles_save_file_safe().await?;
+            }
+            tokio::fs::write(provider_setup, b"local provider setup completed\n").await?;
+        }
+
+        if should_apply_local_defaults {
+            let clash = Self::clash().await;
+            clash.edit_draft(|draft| {
+                draft.0.insert("mode".into(), "rule".into());
+            });
+            clash.apply();
+            clash.data_arc().save_config().await?;
+            tokio::fs::write(first_local_setup, b"local setup completed\n").await?;
+        }
+
+        logging!(
+            info,
+            Type::Config,
+            "Local subscription provider setup complete: {} providers",
+            urls.len()
+        );
+        Ok(())
+    }
+
+    fn subscription_provider_profile(urls: &[&str]) -> Result<String> {
+        let mut providers = Mapping::new();
+        let mut provider_names = Vec::with_capacity(urls.len());
+        for (index, url) in urls.iter().enumerate() {
+            let provider_name = format!("subscription-{}", index + 1);
+            let mut provider = Mapping::new();
+            provider.insert("type".into(), "http".into());
+            provider.insert("url".into(), (*url).into());
+            provider.insert("path".into(), format!("./providers/{provider_name}.yaml").into());
+            provider.insert("interval".into(), Value::from(86_400u64));
+            providers.insert(provider_name.clone().into(), Value::Mapping(provider));
+            provider_names.push(Value::from(provider_name));
+        }
+
+        let group_name = "Japan / Singapore / United States";
+        let mut group = Mapping::new();
+        group.insert("name".into(), group_name.into());
+        group.insert("type".into(), "select".into());
+        group.insert("use".into(), Value::Sequence(provider_names));
+
+        let mut config = Mapping::new();
+        config.insert("proxy-providers".into(), Value::Mapping(providers));
+        config.insert("proxy-groups".into(), Value::Sequence(vec![Value::Mapping(group)]));
+        config.insert(
+            "rules".into(),
+            Value::Sequence(vec![Value::from(format!("MATCH,{group_name}"))]),
+        );
+        Ok(serde_yaml_ng::to_string(&Value::Mapping(config))?.into())
+    }
     pub(crate) async fn disable_tun_and_persist() -> Result<()> {
         let verge = Self::verge().await;
         verge.edit_draft(|draft| {

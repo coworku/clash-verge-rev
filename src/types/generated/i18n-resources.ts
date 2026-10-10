@@ -1237,11 +1237,13 @@ export interface TranslationResources {
           form: {
             fields: {
               allowLan: string
+              allowProfileOverrides: string
               clashCore: string
               dnsOverwrite: string
               external: string
               ipv6: string
               logLevel: string
+              nodeFilter: string
               openUwpTool: string
               portConfig: string
               tunnels: {
@@ -1282,8 +1284,10 @@ export interface TranslationResources {
               }
             }
             tooltips: {
+              allowProfileOverrides: string
               logLevel: string
               networkInterface: string
+              nodeFilter: string
               openUwpTool: string
               unifiedDelay: string
             }

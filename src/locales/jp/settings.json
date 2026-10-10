@@ -111,6 +111,8 @@
           "clashCore": "Clashコア",
           "openUwpTool": "UWPツールを開く",
           "updateGeoData": "GeoDataを更新",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "トンネル管理",
             "localAddr": "ローカル待受アドレス",
@@ -140,7 +142,9 @@
           "networkInterface": "ネットワークインターフェース",
           "unifiedDelay": "統一遅延を有効にすると、2回の遅延テストが行われ、接続ハンドシェイクなどによる異なるタイプのノードの遅延差を解消します。",
           "logLevel": "ログディレクトリのServiceフォルダ内のコアログファイルにのみ適用されます。",
-          "openUwpTool": "Windows 8以降では、UWPアプリケーション（Microsoft Storeなど）がローカルホストのネットワークサービスに直接アクセスすることが制限されています。このツールを使用すると、この制限を回避できます。"
+          "openUwpTool": "Windows 8以降では、UWPアプリケーション（Microsoft Storeなど）がローカルホストのネットワークサービスに直接アクセスすることが制限されています。このツールを使用すると、この制限を回避できます。",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

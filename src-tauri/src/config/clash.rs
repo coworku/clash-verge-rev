@@ -101,9 +101,6 @@ impl IClashTemp {
                 // Only enable this in dev mode
                 #[cfg(feature = "verge-dev")]
                 "http://localhost:3000",
-                "https://yacd.metacubex.one",
-                "https://metacubex.github.io",
-                "https://board.zash.run.place",
             ]
             .into(),
         );

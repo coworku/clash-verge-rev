@@ -111,6 +111,8 @@
           "clashCore": "Clash Çekirdeği",
           "openUwpTool": "UWP Aracını Aç",
           "updateGeoData": "GeoData'yı Güncelle",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Tünel Yönetimi",
             "localAddr": "Yerel Dinleme Adresi",
@@ -140,7 +142,9 @@
           "networkInterface": "Ağ Arayüzü",
           "unifiedDelay": "Birleşik gecikme açıldığında, bağlantı el sıkışmaları vb. nedeniyle farklı tür düğümler arasındaki gecikme farklarını ortadan kaldırmak için iki gecikme testi gerçekleştirilir",
           "logLevel": "Bu parametre yalnızca günlük dizini Hizmet klasöründeki çekirdek günlük dosyaları için geçerlidir",
-          "openUwpTool": "Windows 8'den beri, UWP uygulamaları (Microsoft Store gibi) yerel ana bilgisayar ağ hizmetlerine doğrudan erişmekten kısıtlanmıştır ve bu araç bu kısıtlamayı atlatmak için kullanılabilir"
+          "openUwpTool": "Windows 8'den beri, UWP uygulamaları (Microsoft Store gibi) yerel ana bilgisayar ağ hizmetlerine doğrudan erişmekten kısıtlanmıştır ve bu araç bu kısıtlamayı atlatmak için kullanılabilir",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

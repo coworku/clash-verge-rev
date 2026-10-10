@@ -111,6 +111,8 @@
           "clashCore": "نواة Clash",
           "openUwpTool": "فتح أداة UWP",
           "updateGeoData": "تحديث البيانات الجغرافية",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "إدارة الأنفاق",
             "localAddr": "عنوان الاستماع المحلي",
@@ -140,7 +142,9 @@
           "networkInterface": "واجهة الشبكة",
           "unifiedDelay": "عند تفعيل التأخير الموحد، سيتم إجراء اختبارين للتأخير لتقليل الفروقات الناتجة عن مفاوضات الاتصال",
           "logLevel": "This parameter is valid only for kernel log files in the log directory Service folder",
-          "openUwpTool": "منذ نظام ويندوز 8، يتم تقييد تطبيقات UWP من الوصول المباشر إلى المضيف المحلي. هذه الأداة تتيح تجاوز هذا التقييد"
+          "openUwpTool": "منذ نظام ويندوز 8، يتم تقييد تطبيقات UWP من الوصول المباشر إلى المضيف المحلي. هذه الأداة تتيح تجاوز هذا التقييد",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

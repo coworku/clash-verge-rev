@@ -111,6 +111,8 @@
           "clashCore": "هسته Clash",
           "openUwpTool": "باز کردن ابزار UWP",
           "updateGeoData": "به‌روزرسانی GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "مدیریت تونل‌ها",
             "localAddr": "آدرس شنود محلی",
@@ -140,7 +142,9 @@
           "networkInterface": "رابط شبکه",
           "unifiedDelay": "معادلDELAY را فعال کنید تا ترافیک شبکه به سرعت رسید",
           "logLevel": "این فقط روی فایل‌های لاگ هسته تحت فایل سرویس در فهرست ورود اثر می‌گذارد.",
-          "openUwpTool": "از ویندوز 8 به بعد، برنامه‌های UWP (مانند Microsoft Store) از دسترسی مستقیم به خدمات شبکه محلی محدود شده‌اند و این ابزار می‌تواند برای دور زدن این محدودیت استفاده شود"
+          "openUwpTool": "از ویندوز 8 به بعد، برنامه‌های UWP (مانند Microsoft Store) از دسترسی مستقیم به خدمات شبکه محلی محدود شده‌اند و این ابزار می‌تواند برای دور زدن این محدودیت استفاده شود",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

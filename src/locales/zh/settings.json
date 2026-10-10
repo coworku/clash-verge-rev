@@ -111,6 +111,8 @@
           "clashCore": "Clash 内核",
           "openUwpTool": "UWP 工具",
           "updateGeoData": "更新 GeoData",
+          "nodeFilter": "自动筛选节点（日本 / 新加坡 / 美国）",
+          "allowProfileOverrides": "允许订阅覆写",
           "tunnels": {
             "title": "流量隧道管理",
             "localAddr": "本地监听地址",
@@ -140,7 +142,9 @@
           "networkInterface": "网络接口",
           "unifiedDelay": "开启统一延迟时，会进行两次延迟测试，以消除连接握手等带来的不同类型节点的延迟差异",
           "logLevel": "仅对日志目录 Service 文件夹下的内核日志文件生效",
-          "openUwpTool": "Windows 8 开始限制 UWP 应用（如微软商店）直接访问本地主机的网络服务，使用此工具可绕过该限制"
+          "openUwpTool": "Windows 8 开始限制 UWP 应用（如微软商店）直接访问本地主机的网络服务，使用此工具可绕过该限制",
+          "nodeFilter": "只在代理组中保留名称包含日本、新加坡或美国的节点；关闭后保留订阅原配置",
+          "allowProfileOverrides": "允许订阅附带的覆写、脚本和自定义规则生效；不清楚用途时建议关闭"
         },
         "options": {
           "logLevel": {

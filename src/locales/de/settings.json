@@ -111,6 +111,8 @@
           "clashCore": "Clash-Kern",
           "openUwpTool": "UWP-Tool öffnen",
           "updateGeoData": "Geo-Daten aktualisieren",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Tunnel-Verwaltung",
             "localAddr": "Lokale Abhöradresse",
@@ -140,7 +142,9 @@
           "networkInterface": "Netzwerkschnittstelle",
           "unifiedDelay": "Wenn die einheitliche Latenz aktiviert ist, werden zwei Latenztests durchgeführt, um die Latenzunterschiede zwischen verschiedenen Knotentypen aufgrund von Verbindungsaufbau und anderen Faktoren zu eliminieren.",
           "logLevel": "Dies wirkt sich nur auf die Kernprotokolldateien im Verzeichnis Service im Protokollverzeichnis aus.",
-          "openUwpTool": "Ab Windows 8 wird die direkte Netzwerkverbindung von UWP-Anwendungen (z. B. Microsoft Store) zu lokalen Hosts eingeschränkt. Mit diesem Tool können Sie diese Einschränkung umgehen."
+          "openUwpTool": "Ab Windows 8 wird die direkte Netzwerkverbindung von UWP-Anwendungen (z. B. Microsoft Store) zu lokalen Hosts eingeschränkt. Mit diesem Tool können Sie diese Einschränkung umgehen.",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

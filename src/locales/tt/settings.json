@@ -111,6 +111,8 @@
           "clashCore": "Clash ядросы",
           "openUwpTool": "UWP инструментын ачу",
           "updateGeoData": "GeoData яңарту",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Tunnel İdäräse",
             "localAddr": "Urınçı Adres",
@@ -140,7 +142,9 @@
           "networkInterface": "Челтәр интерфейсы",
           "unifiedDelay": "Бердәм задержка актив булганда, төрле типтагы узеллар өчен икеләтә тест башкарыла, TCP установканы раслау аермаларын тигезләү максатында",
           "logLevel": "Бу фәкать сервис режимында эшләгән вакытта системалы журнал файлларына кагыла",
-          "openUwpTool": "Windows 8'дән башлап UWP кушымталары (Microsoft Store кебек) локаль хосттагы челтәр хезмәтләренә турыдан-туры тоташа алмый. Бу инструмент әлеге чикләүне әйләнеп узарга ярдәм итә"
+          "openUwpTool": "Windows 8'дән башлап UWP кушымталары (Microsoft Store кебек) локаль хосттагы челтәр хезмәтләренә турыдан-туры тоташа алмый. Бу инструмент әлеге чикләүне әйләнеп узарга ярдәм итә",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {

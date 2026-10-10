@@ -1,6 +1,7 @@
 mod chain;
 pub mod field;
 mod merge;
+mod node_filter;
 mod script;
 pub mod seq;
 mod tun;
@@ -36,6 +37,9 @@ struct ConfigValues {
     clash_core: Option<String>,
     enable_tun: bool,
     enable_builtin: bool,
+    allow_profile_overrides: bool,
+    enable_node_filter: bool,
+    node_filter: Option<String>,
     socks_enabled: bool,
     http_enabled: bool,
     enable_dns_settings: bool,
@@ -118,6 +122,9 @@ async fn get_config_values(profile_uid: &str) -> ConfigValues {
     let IVerge {
         ref enable_tun_mode,
         ref enable_builtin_enhanced,
+        ref allow_profile_overrides,
+        ref enable_node_filter,
+        ref node_filter,
         ref verge_socks_enabled,
         ref verge_http_enabled,
         ref enable_external_controller,
@@ -135,6 +142,9 @@ async fn get_config_values(profile_uid: &str) -> ConfigValues {
         verge_http_enabled.unwrap_or(false),
         dns_settings.enabled,
     );
+    let allow_profile_overrides = allow_profile_overrides.unwrap_or(false);
+    let enable_node_filter = enable_node_filter.unwrap_or(true);
+    let node_filter = node_filter.clone();
 
     #[cfg(not(target_os = "windows"))]
     let redir_enabled = verge_arc.verge_redir_enabled.unwrap_or(false);
@@ -150,6 +160,9 @@ async fn get_config_values(profile_uid: &str) -> ConfigValues {
         clash_core,
         enable_tun,
         enable_builtin,
+        allow_profile_overrides,
+        enable_node_filter,
+        node_filter,
         socks_enabled,
         http_enabled,
         enable_dns_settings,
@@ -250,7 +263,12 @@ async fn process_global_items(
     global_script: ChainItem,
     profile_name: &String,
     authoritative: &AuthoritativeFields,
+    enabled: bool,
 ) -> (Mapping, Vec<String>, HashMap<String, ResultLog>) {
+    if !enabled {
+        return (config, exists_keys, result_map);
+    }
+
     if let ChainType::Merge(merge) = global_merge.data {
         exists_keys.extend(use_keys(&merge));
         let before = authoritative.current(&config);
@@ -287,7 +305,12 @@ fn process_seq_items(
     rules_item: ChainItem,
     proxies_item: ChainItem,
     groups_item: ChainItem,
+    enabled: bool,
 ) -> Mapping {
+    if !enabled {
+        return config;
+    }
+
     if let ChainType::Rules(rules) = rules_item.data {
         config = use_seq(rules, config, "rules");
     }
@@ -545,7 +568,12 @@ async fn process_profile_items(
     script_item: ChainItem,
     profile_name: &String,
     authoritative: &AuthoritativeFields,
+    enabled: bool,
 ) -> (Mapping, Vec<String>, HashMap<String, ResultLog>) {
+    if !enabled {
+        return (config, exists_keys, result_map);
+    }
+
     if let ChainType::Merge(merge) = merge_item.data {
         exists_keys.extend(use_keys(&merge));
         let before = authoritative.current(&config);
@@ -880,6 +908,9 @@ pub async fn enhance(
         clash_core,
         enable_tun,
         enable_builtin,
+        allow_profile_overrides,
+        enable_node_filter,
+        node_filter,
         socks_enabled,
         http_enabled,
         enable_dns_settings,
@@ -911,7 +942,7 @@ pub async fn enhance(
 
     let result_map = HashMap::new();
 
-    let config = process_seq_items(config, rules_item, proxies_item, groups_item);
+    let config = process_seq_items(config, rules_item, proxies_item, groups_item, allow_profile_overrides);
     let exists_keys = use_keys(&config).collect::<Vec<_>>();
     let gui_tun_keys = gui_tun_keys(&clash_config);
 
@@ -941,6 +972,7 @@ pub async fn enhance(
         global_script,
         &profile_name,
         &authoritative,
+        allow_profile_overrides,
     )
     .await;
 
@@ -952,11 +984,13 @@ pub async fn enhance(
         script_item,
         &profile_name,
         &authoritative,
+        allow_profile_overrides,
     )
     .await;
 
     notify_discarded_keys(authoritative.overridden(&authoritative, &authoritative.current(&config)));
     let config = authoritative.enforce(config);
+    let config = node_filter::apply(config, enable_node_filter, node_filter.as_deref());
     let config = ensure_lan_bind_address(config);
 
     let config = cleanup_proxy_groups(config);

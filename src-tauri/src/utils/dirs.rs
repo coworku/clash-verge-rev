@@ -9,12 +9,12 @@ use std::{
 use tauri::Manager as _;
 
 #[cfg(not(feature = "verge-dev"))]
-pub static APP_ID: &str = "io.github.clash-verge-rev.clash-verge-rev";
+pub static APP_ID: &str = "io.github.clash-verge-rev.clash-verge-jianjian";
 #[cfg(not(feature = "verge-dev"))]
 pub static BACKUP_DIR: &str = "clash-verge-rev-backup";
 
 #[cfg(feature = "verge-dev")]
-pub static APP_ID: &str = "io.github.clash-verge-rev.clash-verge-rev.dev";
+pub static APP_ID: &str = "io.github.clash-verge-rev.clash-verge-jianjian.dev";
 #[cfg(feature = "verge-dev")]
 pub static BACKUP_DIR: &str = "clash-verge-rev-backup-dev";
 
@@ -259,7 +259,7 @@ mod ipc_tests {
     #[test]
     fn sidecar_ipc_stays_in_the_app_root() {
         let identity = OwnerIdentity::Unix { uid: 501, gid: 20 };
-        let app_root = Path::new("/home/test/.local/share/io.github.clash-verge-rev.clash-verge-rev");
+        let app_root = Path::new("/home/test/.local/share/io.github.clash-verge-rev.clash-verge-jianjian");
         let path = sidecar_ipc_path_for(app_root, &identity);
 
         assert_eq!(path, app_root.join("verge-mihomo.sock"));
@@ -280,7 +280,7 @@ mod ipc_tests {
     fn sidecar_ipc_ignores_long_app_root_and_fits_sockaddr_un() -> anyhow::Result<()> {
         let identity = OwnerIdentity::Unix { uid: 501, gid: 20 };
         let app_root =
-            Path::new("/Users/support/Library/Application Support/io.github.clash-verge-rev.clash-verge-rev.dev");
+            Path::new("/Users/support/Library/Application Support/io.github.clash-verge-rev.clash-verge-jianjian.dev");
         let path = sidecar_ipc_path_for(app_root, &identity)?;
 
         assert!(!path.starts_with(app_root));

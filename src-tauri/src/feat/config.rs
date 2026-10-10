@@ -72,6 +72,9 @@ bitflags! {
 
 fn determine_update_flags(patch: &IVerge) -> UpdateFlags {
     let tun_mode = patch.enable_tun_mode;
+    let allow_profile_overrides = patch.allow_profile_overrides;
+    let enable_node_filter = patch.enable_node_filter;
+    let node_filter = &patch.node_filter;
     let auto_launch = patch.enable_auto_launch;
     let system_proxy = patch.enable_system_proxy;
     let pac = patch.proxy_auto_config;
@@ -144,7 +147,8 @@ fn determine_update_flags(patch: &IVerge) -> UpdateFlags {
     if restart_core_needed {
         update_flags.insert(UpdateFlags::RESTART_CORE);
     }
-    if tun_mode.is_some() {
+    if tun_mode.is_some() || allow_profile_overrides.is_some() || enable_node_filter.is_some() || node_filter.is_some()
+    {
         update_flags.insert(UpdateFlags::CLASH_CONFIG | UpdateFlags::GROUP_SYS_TRAY);
     }
     if enable_global_hotkey.is_some() || home_cards.is_some() {

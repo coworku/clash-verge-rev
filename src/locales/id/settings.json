@@ -111,6 +111,8 @@
           "clashCore": "Inti Clash",
           "openUwpTool": "Buka alat UWP",
           "updateGeoData": "Perbarui GeoData",
+          "nodeFilter": "Auto node filter (Japan / Singapore / United States)",
+          "allowProfileOverrides": "Allow subscription overrides",
           "tunnels": {
             "title": "Manajemen Terowongan",
             "localAddr": "Alamat Dengarkan Lokal",
@@ -140,7 +142,9 @@
           "networkInterface": "Antarmuka Jaringan",
           "unifiedDelay": "Saat keterlambatan terpadu diaktifkan, dua tes keterlambatan akan dilakukan untuk menghilangkan perbedaan keterlambatan antara berbagai jenis node yang disebabkan oleh jabat tangan koneksi, dll.",
           "logLevel": "Ini hanya berlaku untuk file log kernel di folder layanan di direktori log.",
-          "openUwpTool": "Sejak Windows 8, aplikasi UWP (seperti Microsoft Store) dibatasi dari mengakses layanan jaringan host lokal secara langsung, dan alat ini dapat digunakan untuk melewati pembatasan ini"
+          "openUwpTool": "Sejak Windows 8, aplikasi UWP (seperti Microsoft Store) dibatasi dari mengakses layanan jaringan host lokal secara langsung, dan alat ini dapat digunakan untuk melewati pembatasan ini",
+          "nodeFilter": "Only keep nodes whose names match Japan, Singapore, or United States; turn off to keep the subscription configuration",
+          "allowProfileOverrides": "Allow subscription-provided overrides, scripts, and custom rules; keep this off unless you know why you need it"
         },
         "options": {
           "logLevel": {
