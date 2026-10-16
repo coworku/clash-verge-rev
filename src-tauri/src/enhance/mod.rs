@@ -1,4 +1,5 @@
 use crate::core::notify::NoticeStatus;
+mod ai_rules;
 mod chain;
 pub mod field;
 mod merge;
@@ -984,6 +985,7 @@ pub async fn enhance(
 
     notify_discarded_keys(authoritative.overridden(&authoritative, &authoritative.current(&config)));
     let config = authoritative.enforce(config);
+    let config = ai_rules::apply(config);
     let config = node_filter::apply(config, enable_node_filter, node_filter.as_deref());
     let config = ensure_lan_bind_address(config);
 

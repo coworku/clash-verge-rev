@@ -9,6 +9,7 @@
 <details>
 <summary><strong> ✨ 新增功能 </strong></summary>
 
+- 新增 ChatGPT、Claude、Grok、Gemini 和 Perplexity 独立分流与节点选择
 
 </details>
 
